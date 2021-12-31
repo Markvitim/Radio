@@ -19,19 +19,28 @@ public class Radio {
     }
 
     public int setToMaxNumberStation() {
-        if (curStation > 9) {
-            this.curStation = 0;
+        if (curStation <= 9) {
+            curStation--;
         }
+        if (curStation < 0) {
+            curStation = 9;
+        }
+        this.curStation = curStation;
         return curStation;
     }
 
-    public int setToMinNumberStation() {
-        if (curStation < 0) {
-            this.curStation = 9;
 
+    public int setToMinNumberStation() {
+        if (curStation <= 9) {
+            curStation++;
         }
+        if (curStation > 9) {
+            curStation = 0;
+        }
+        this.curStation = curStation;
         return curStation;
     }
 
 }
+
 
