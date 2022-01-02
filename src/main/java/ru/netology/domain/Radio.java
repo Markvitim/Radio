@@ -20,16 +20,16 @@ public class Radio {
     }
 
     public int setToMaxNumberStation() {
-        if (curStation > 0) {
-            curStation = curStation - 1;
+        if (curStation < 9) {
+            curStation = curStation + 1;
         }
         return curStation;
     }
 
 
     public int setToMinNumberStation() {
-        if (curStation < 9) {
-            curStation = curStation + 1;
+        if (curStation >0) {
+            curStation = curStation - 1;
         }
         return curStation;
     }
