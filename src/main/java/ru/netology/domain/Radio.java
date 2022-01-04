@@ -19,7 +19,7 @@ public class Radio {
         this.curStation = curStation;
     }
 
-    public int setToMaxNumberStation() {
+    public int setNextStation() {
         if (curStation < 9) {
             curStation = curStation + 1;
         }
@@ -27,8 +27,8 @@ public class Radio {
     }
 
 
-    public int setToMinNumberStation() {
-        if (curStation >0) {
+    public int setPrevStation() {
+        if (curStation > 0) {
             curStation = curStation - 1;
         }
         return curStation;
@@ -56,7 +56,7 @@ public class Radio {
     }
 
     public int reduceVolume() {
-        if (curVolume >0) {
+        if (curVolume > 0) {
             curVolume--;
         }
         return curVolume;
