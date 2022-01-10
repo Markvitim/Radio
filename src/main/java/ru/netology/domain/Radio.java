@@ -20,16 +20,18 @@ public class Radio {
     }
 
     public int setNextStation() {
-        if (curStation < 9) {
-            curStation = curStation + 1;
+        curStation = curStation + 1;
+        if (curStation > 9) {
+            curStation = 0;
         }
         return curStation;
     }
 
 
     public int setPrevStation() {
-        if (curStation > 0) {
-            curStation = curStation - 1;
+        curStation = curStation - 1;
+        if (curStation < 0) {
+            curStation = 9;
         }
         return curStation;
     }
