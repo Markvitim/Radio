@@ -4,7 +4,7 @@ package ru.netology.domain;
 public class Radio {
     private int curStation;
     private int curVolume;
-    private int numStation = 10;
+    private int amountStation = 10;
     private int stationMin;
     private int volumeMax = 100;
     private int volumeMin;
@@ -12,22 +12,8 @@ public class Radio {
     public Radio() {
     }
 
-    public Radio(int curStation, int curVolume, int numStation, int stationMin, int volumeMax, int volumeMin) {
-        this.curStation = curStation;
-        this.curVolume = curVolume;
-        this.numStation = numStation;
-        this.stationMin = stationMin;
-        this.volumeMax = volumeMax;
-        this.volumeMin = volumeMin;
-    }
-
-    public Radio(int curStation, int numStation) {
-        this.curStation = curStation;
-        this.numStation = numStation;
-    }
-
-    public Radio(int curVolume) {
-        this.curVolume = curVolume;
+    public Radio(int amountStation) {
+        this.amountStation = amountStation;
     }
 
     public int getCurStation() {
@@ -46,12 +32,12 @@ public class Radio {
         this.curVolume = curVolume;
     }
 
-    public int getNumStation() {
-        return numStation;
+    public int getAmountStation() {
+        return amountStation;
     }
 
-    public void setNumStation(int numStation) {
-        this.numStation = numStation;
+    public void setAmountStation(int amountStation) {
+        this.amountStation = amountStation;
     }
 
     public int getStationMin() {
@@ -79,18 +65,18 @@ public class Radio {
     }
 
     public int toSetCurStation() {
-        if (curStation > numStation - 1) {
+        if (curStation > amountStation - 1) {
             curStation = stationMin;
         }
         if (curStation < stationMin) {
-            curStation = numStation - 1;
+            curStation = amountStation - 1;
         }
         return curStation;
     }
 
     public int setNextStation() {
         curStation++;
-        if (curStation > numStation - 1) {
+        if (curStation > amountStation - 1) {
             curStation = stationMin;
         }
         return curStation;
@@ -99,7 +85,7 @@ public class Radio {
     public int setPrevStation() {
         curStation--;
         if (curStation < stationMin) {
-            curStation = numStation - 1;
+            curStation = amountStation - 1;
         }
         return curStation;
     }

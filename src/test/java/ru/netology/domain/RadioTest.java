@@ -10,34 +10,30 @@ public class RadioTest {
         Radio radio = new Radio();
         Assertions.assertEquals(0, radio.getCurStation());
         Assertions.assertEquals(0, radio.getCurVolume());
-        Assertions.assertEquals(10, radio.getNumStation());
+        Assertions.assertEquals(10, radio.getAmountStation());
         Assertions.assertEquals(0, radio.getStationMin());
         Assertions.assertEquals(100, radio.getVolumeMax());
         Assertions.assertEquals(0, radio.getVolumeMin());
     }
 
     @Test
-    public void shouldChangeFields() {
-        Radio radio = new Radio(5, 5, 8, 1, 50, 5);
-        Assertions.assertEquals(5, radio.getCurStation());
-        Assertions.assertEquals(5, radio.getCurVolume());
-        Assertions.assertEquals(8, radio.getNumStation());
-        Assertions.assertEquals(1, radio.getStationMin());
+    public void shouldCoverAllBranches() {
+        Radio radio = new Radio();
+
+        radio.setAmountStation(20);
+        radio.setVolumeMin(2);
+        radio.setVolumeMax(50);
+        radio.setStationMin(2);
+        Assertions.assertEquals(20, radio.getAmountStation());
+        Assertions.assertEquals(2, radio.getVolumeMin());
         Assertions.assertEquals(50, radio.getVolumeMax());
-        Assertions.assertEquals(5, radio.getVolumeMin());
+        Assertions.assertEquals(2, radio.getStationMin());
+
     }
+
 
     @Test
     public void shouldSetCurStationTop() {
-        Radio radio = new Radio();
-        radio.setStationMin(2);
-        radio.setCurStation(10);
-        radio.toSetCurStation();
-        Assertions.assertEquals(2, radio.getCurStation());
-    }
-
-    @Test
-    public void shouldSetCurStationBottom() {
         Radio radio = new Radio();
         radio.setCurStation(-1);
         radio.toSetCurStation();
@@ -45,24 +41,33 @@ public class RadioTest {
     }
 
     @Test
-    public void shouldSetNextStationTop() {
-        Radio radio = new Radio(9, 10);
+    public void shouldSetCurStationBottom() {
+        Radio radio = new Radio();
+        radio.setCurStation(10);
         radio.toSetCurStation();
+        Assertions.assertEquals(0, radio.getCurStation());
+    }
+
+    @Test
+    public void shouldSetNextStationTop() {
+        Radio radio = new Radio();
+        radio.setCurStation(9);
         radio.setNextStation();
         Assertions.assertEquals(0, radio.getCurStation());
     }
 
     @Test
     public void shouldSetNextStationMiddle() {
-        Radio radio = new Radio(5, 10);
-        radio.toSetCurStation();
+        Radio radio = new Radio();
+        radio.setCurStation(5);
         radio.setNextStation();
         Assertions.assertEquals(6, radio.getCurStation());
     }
 
     @Test
     public void shouldSetNextCurStationBottom() {
-        Radio radio = new Radio(-1, 10);
+        Radio radio = new Radio();
+        radio.setCurStation(-1);
         radio.toSetCurStation();
         radio.setNextStation();
         Assertions.assertEquals(0, radio.getCurStation());
@@ -70,61 +75,68 @@ public class RadioTest {
 
     @Test
     public void shouldSetPrevStationMiddle() {
-        Radio radio = new Radio(5, 10);
-        radio.toSetCurStation();
+        Radio radio = new Radio();
+        radio.setCurStation(5);
         radio.setPrevStation();
         Assertions.assertEquals(4, radio.getCurStation());
     }
 
     @Test
     public void shouldSetPrevStationTop() {
-        Radio radio = new Radio(10, 10);
+        Radio radio = new Radio();
+        radio.setCurStation(-1);
         radio.toSetCurStation();
         radio.setPrevStation();
-        Assertions.assertEquals(9, radio.getCurStation());
+        Assertions.assertEquals(8, radio.getCurStation());
     }
 
     @Test
-    public void shouldCheckNumStation() {
-        Radio radio = new Radio(10, 5);
-        radio.setNumStation(2);
-        radio.toSetCurStation();
+    public void shouldCheckAmountStation() {
+        Radio radio = new Radio(15);
+        Assertions.assertEquals(15, radio.getAmountStation());
+    }
+
+    @Test
+    public void shouldCheckAmountStationMin() {
+        Radio radio = new Radio(8);
+        radio.setCurStation(7);
         radio.setNextStation();
-        Assertions.assertEquals(1, radio.getCurStation());
+        Assertions.assertEquals(0, radio.getCurStation());
     }
 
     @Test
-    public void shouldCheckNumStationMin() {
-        Radio radio = new Radio(-1, 3);
-        radio.toSetCurStation();
-        radio.setPrevStation();
-        Assertions.assertEquals(1, radio.getCurStation());
-    }
-
-    @Test
-    public void shouldSetVolume() {
-        Radio radio = new Radio(-50);
+    public void shouldSetVolumeMin() {
+        Radio radio = new Radio();
         radio.setCurVolume(-100);
         radio.setVolume();
         Assertions.assertEquals(0, radio.getCurVolume());
     }
 
     @Test
-    public void shouldIncreaseVolume() {
-        Radio radio = new Radio(99);
-        radio.increaseVolume();
-        radio.setVolumeMax(99);
+    public void shouldSetVolumeMax() {
+        Radio radio = new Radio();
+        radio.setCurVolume(200);
         radio.setVolume();
-        Assertions.assertEquals(99, radio.getCurVolume());
+        Assertions.assertEquals(100, radio.getCurVolume());
+    }
+
+
+    @Test
+    public void shouldIncreaseVolume() {
+        Radio radio = new Radio();
+        radio.setCurVolume(99);
+        radio.increaseVolume();
+        radio.increaseVolume();
+        Assertions.assertEquals(100, radio.getCurVolume());
     }
 
     @Test
     public void shouldLowVolume() {
-        Radio radio = new Radio(15);
+        Radio radio = new Radio();
+        radio.setCurVolume(1);
         radio.lowVolume();
-        radio.setVolumeMin(15);
-        radio.setVolume();
-        Assertions.assertEquals(15, radio.getCurVolume());
+        radio.lowVolume();
+        Assertions.assertEquals(0, radio.getCurVolume());
     }
 
 }
